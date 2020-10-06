@@ -2,6 +2,7 @@
   <div class="home">
     <img alt="Vue logo" src="../assets/logo.png">
     <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <b-button type="submit" variant="primary">Submit</b-button>
   </div>
 </template>
 
