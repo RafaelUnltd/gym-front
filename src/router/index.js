@@ -1,15 +1,19 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Home from '../views/Home.vue'
 import Login from '../views/login.vue'
+import ClientDashboard from '../views/client-dashboard.vue'
+import MedicalExam from '../views/medical-exam.vue'
+import TrainingRegister from '../views/training-register.vue'
+import RegisterUser from '../views/register-user.vue'
+import RegisterEmployee from '../views/register-employee.vue'
+import EnrollUser from '../views/enroll-user.vue'
 
 Vue.use(VueRouter)
 
 const routes = [
   {
     path: '/',
-    name: 'Home',
-    component: Home
+    redirect: '/login'
   },
   {
     path: '/login',
@@ -17,12 +21,34 @@ const routes = [
     component: Login
   },
   {
-    path: '/about',
-    name: 'About',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/About.vue')
+    path: '/app/client-dashboard',
+    name: 'ClientDashboard',
+    component: ClientDashboard
+  },
+  {
+    path: '/app/medical-exam',
+    name: 'MedicalExam',
+    component: MedicalExam
+  },
+  {
+    path: '/app/training-register',
+    name: 'TrainingRegister',
+    component: TrainingRegister
+  },
+  {
+    path: '/app/register-user',
+    name: 'RegisterUser',
+    component: RegisterUser
+  },
+  {
+    path: '/app/register-employee',
+    name: 'RegisterEmployee',
+    component: RegisterEmployee
+  },
+  {
+    path: '/app/enroll-user',
+    name: 'EnrollUser',
+    component: EnrollUser
   }
 ]
 

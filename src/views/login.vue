@@ -9,19 +9,6 @@
         @reset.prevent="onReset"
       >
         <b-form-group
-          id="input-group-profile"
-          label="Perfil:"
-          label-for="profile"
-        >
-          <b-form-select
-            id="profile"
-            v-model="form.selectedProfile"
-            :options="profiles"
-            required
-          ></b-form-select>
-        </b-form-group>
-
-        <b-form-group
           id="input-group-user"
           label="Usuário:"
           label-for="user"
@@ -70,6 +57,8 @@
 </template>
 
 <script>
+import axios from 'axios'
+
 export default {
   name: 'Login',
   data: () => ({
@@ -87,14 +76,48 @@ export default {
       ]
     },
   },
+  mounted () {
+    const token = localStorage.getItem('token')
+
+    if (token) {
+      const profile = localStorage.getItem('profile')
+      this.redirectToCorrectProfile()
+    }
+  },
   methods: {
-    onSubmit () {
-      console.log(this.form)
+    async onSubmit () {
+      const payload = {
+        username: this.form.user,
+        password: this.form.password
+      }
+
+      const { data } = await axios.post('http://localhost:9000/login', payload)
+
+      localStorage.setItem('token', data.token)
+      localStorage.setItem('profile', data.profile)
+
+      this.redirectToCorrectProfile(data.profile)
     },
     onReset () {
       this.form.user = '',
       this.form.password = '',
       this.form.selectedProfile = 'Cliente'
+    },
+    redirectToCorrectProfile (profile) {
+      switch(profile) {
+        case 'client':
+          this.$router.push('/app/client-dashboard')
+          break
+        case 'secretary':
+          this.$router.push('/app/register-user')
+          break
+        case 'professor':
+          this.$router.push('/app/training-register')
+          break
+        case 'doctor':
+          this.$router.push('/app/medical-exam')
+          break
+      }
     }
   }
 }

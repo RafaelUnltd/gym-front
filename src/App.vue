@@ -12,6 +12,10 @@
   color: #2c3e50;
 }
 
+body {
+  background-color: #FAFAFA;
+}
+
 #nav {
   padding: 30px;
 
